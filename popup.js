@@ -14,7 +14,7 @@ document.getElementById("generatePassword").addEventListener("click", function (
         for (let i = 0; i < NUMBER_OF_WORDS; i++) {
             allWords += selectWord(words)
         }
-        document.getElementById("generatedPassword").value = allWords
+        document.getElementById("generatedPassword").innerHTML = allWords
     });
 
 })
