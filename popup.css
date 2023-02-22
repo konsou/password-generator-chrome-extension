@@ -1,9 +1,10 @@
 body {
     width: 30em;
+    padding: 0.5em;
 }
 
 #generatedPassword {
-    width: 100%;
+    width: 97.5%;
     min-height: 1.5em;
     border: 1px solid gray;
     border-radius: 5px;
