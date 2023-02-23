@@ -12,14 +12,13 @@ document.getElementById("generatePassword").addEventListener("click", async func
     const numberOfWords = parseInt(document.getElementById("numberOfWords").value);
     const capitalizeWords = document.getElementById('capitalizeWords').checked;
     const dashesBetweenWords = document.getElementById('dashesBetweenWords').checked;
-    const regularWords = (await chrome.storage.local.get(["wordsRegular"])).wordsRegular;
-    const dialectWords = (await chrome.storage.local.get(["wordsDialect"])).wordsDialect;
-    const allWords = regularWords.concat(dialectWords);
-    console.log(`using ${allWords.length} words`)
+    const words = (await chrome.storage.local.get(["words"])).words;
+
+    console.log(`using ${words.length} words`)
 
     let allSelectedWords = ""
     for (let i = 0; i < numberOfWords; i++) {
-        let selectedWord = selectWord(allWords)
+        let selectedWord = selectWord(words)
         if (capitalizeWords) {
             selectedWord = capitalize(selectedWord)
         }

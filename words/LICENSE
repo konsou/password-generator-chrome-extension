@@ -1,0 +1,13 @@
+kotus-sanalista-murre.json is a processed combination of two word lists:
+
+Modern Finnish word list by the Institute for the Languages of Finland
+- source: https://kaino.kotus.fi/sanat/nykysuomi/
+- licenses:
+  - GNU LGPL (Lesser General Public License)
+  - EUPL v.1.1 (European Union Public License)
+  - CC Attribution 3.0
+
+Finnish dialect dictionary, xml version
+- source: https://kaino.kotus.fi/lataa/sms.zip
+- authors: https://kaino.kotus.fi/sms/?p=background&sp=3
+- license: Creative Commons Attribution 4.0
