@@ -26,6 +26,7 @@ document.getElementById("generatePassword").addEventListener("click", async func
     const numberOfWords = parseInt(document.getElementById("numberOfWords").value);
     const capitalizeWords = document.getElementById('capitalizeWords').checked;
     const dashesBetweenWords = document.getElementById('dashesBetweenWords').checked;
+    const includeNumber = document.getElementById('includeNumber').checked;
     const words = window.words
 
     let allSelectedWords = ""
@@ -36,6 +37,9 @@ document.getElementById("generatePassword").addEventListener("click", async func
         }
         if (dashesBetweenWords && i > 0) {
             selectedWord = `-${selectedWord}`
+        }
+        if (includeNumber && i === numberOfWords - 1) {
+            selectedWord = `${selectedWord}${getRandomNumberInRange(0, 9)}`
         }
         allSelectedWords += selectedWord
     }
