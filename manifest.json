@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Finnish Passphrase Generator",
   "description": "Generates passphrases using a Finnish dictionary",
-  "version": "1.0",
+  "version": "0.1",
   "action": {
     "default_popup": "popup.html",
     "default_icon": "hello_extensions.png"
