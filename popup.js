@@ -1,3 +1,9 @@
+getWordsFromStorage()
+
+async function getWordsFromStorage() {
+    window.words = (await chrome.storage.local.get(["words"])).words
+}
+
 function selectWord(wordList) {
     // TODO: select with cryptographically acceptable randomness
     return wordList[Math.floor(Math.random() * wordList.length)];
@@ -8,13 +14,10 @@ function capitalize(string) {
 }
 
 document.getElementById("generatePassword").addEventListener("click", async function (e) {
-    console.log("click")
     const numberOfWords = parseInt(document.getElementById("numberOfWords").value);
     const capitalizeWords = document.getElementById('capitalizeWords').checked;
     const dashesBetweenWords = document.getElementById('dashesBetweenWords').checked;
-    const words = (await chrome.storage.local.get(["words"])).words;
-
-    console.log(`using ${words.length} words`)
+    const words = window.words
 
     let allSelectedWords = ""
     for (let i = 0; i < numberOfWords; i++) {
