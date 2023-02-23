@@ -5,12 +5,21 @@ async function getWordsFromStorage() {
 }
 
 function selectWord(wordList) {
-    // TODO: select with cryptographically acceptable randomness
-    return wordList[Math.floor(Math.random() * wordList.length)];
+    const index = getRandomNumberInRange(0, wordList.length);
+    return wordList[index];
 }
 
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function getRandomNumberInRange(min, max) {
+    // NOTE: This is _probably_ cryptographically random but needs verification
+    const crypto = window.crypto; // Get the crypto object
+    const array = new Uint32Array(1); // Create an array to hold the random value
+    crypto.getRandomValues(array); // Fill the array with cryptographically random values
+    const randomNumber = array[0] / (0xffffffff + 1); // Convert the value to a float between 0 and 1
+    return Math.floor(randomNumber * (max - min + 1) + min); // Scale the float to the range and return an integer
 }
 
 document.getElementById("generatePassword").addEventListener("click", async function (e) {
