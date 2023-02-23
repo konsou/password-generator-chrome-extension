@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Finnish Passphrase Generator",
-  "description": "Generates passphrases using a Finnish dictionary",
-  "version": "0.1",
+  "description": "Generates passphrases using Finnish dictionaries. NOTE: randomness not guaranteed to be cryptographically secure!",
+  "version": "0.0.0.1",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
