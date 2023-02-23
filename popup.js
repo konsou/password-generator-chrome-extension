@@ -32,3 +32,8 @@ document.getElementById("generatePassword").addEventListener("click", async func
     }
     document.getElementById("generatedPassword").innerHTML = allSelectedWords
 })
+
+document.getElementById("copyToClipboard").addEventListener("click", function (e) {
+    const text = document.getElementById("generatedPassword").innerHTML
+    navigator.clipboard.writeText(text);
+})
