@@ -1,8 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Finnish Passphrase Generator",
-  "description": "Generates passphrases using Finnish dictionaries. NOTE: randomness not guaranteed to be cryptographically secure!",
-  "version": "0.0.0.1",
+  "description": "Generates passphrases using Finnish dictionaries.",
+  "version": "0.0.0.2",
+  "homepage_url": "https://github.com/konsou/password-generator-chrome-extension",
+  "author": "Tomi Javanainen",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
