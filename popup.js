@@ -14,7 +14,6 @@ function capitalize(string) {
 }
 
 function getRandomNumberInRange(min, max) {
-    // NOTE: This is _probably_ cryptographically random but needs verification
     const crypto = window.crypto; // Get the crypto object
     const array = new Uint32Array(1); // Create an array to hold the random value
     crypto.getRandomValues(array); // Fill the array with cryptographically random values
