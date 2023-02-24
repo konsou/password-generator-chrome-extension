@@ -1,12 +1,13 @@
 const DEFAULT_NUMBER_OF_WORDS = 4
+let words = []
 
 window.addEventListener("load", async function () {
     updateOptionsFromStorage()
-    getWordsFromStorage()
+    getWordsFromBackground()
 })
 
-async function getWordsFromStorage() {
-    window.words = (await chrome.storage.local.get(["words"])).words
+async function getWordsFromBackground() {
+    words = (await chrome.runtime.sendMessage({getWords: true})).words;
     document.getElementById("generatePassword").disabled = false
 }
 
@@ -43,7 +44,6 @@ document.getElementById("generatePassword").addEventListener("click", async func
     const capitalizeWords = document.getElementById('capitalizeWords').checked;
     const dashesBetweenWords = document.getElementById('dashesBetweenWords').checked;
     const includeNumber = document.getElementById('includeNumber').checked;
-    const words = window.words
 
     let allSelectedWords = ""
     for (let i = 0; i < numberOfWords; i++) {

@@ -1,10 +1,12 @@
-async function loadWordsToStorage() {
-    const words = await fetch("words/kotus-sanalista-yhdistetty.json")
-    const wordsJson = await words.json()
-    await chrome.storage.local.set({"words": wordsJson})
-    console.log(wordsJson.length + " words loaded");
-}
+let words = []
 
-chrome.runtime.onInstalled.addListener(() => {
-    loadWordsToStorage()
+chrome.runtime.onInstalled.addListener(async function () {
+    const loadedWords = await fetch("words/kotus-sanalista-yhdistetty.json")
+    words = await loadedWords.json()
+    console.log(`${words.length} words loaded`)
 });
+
+chrome.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
+        if (request.getWords) await sendResponse({"words": words});
+    }
+);
