@@ -1,19 +1,24 @@
+const DEFAULT_NUMBER_OF_WORDS = 4
+
 window.addEventListener("load", async function () {
-    console.log("onload")
-    // TODO: show "loading"
-    getWordsFromStorage()
     updateOptionsFromStorage()
+    getWordsFromStorage()
 })
 
 async function getWordsFromStorage() {
     window.words = (await chrome.storage.local.get(["words"])).words
+    document.getElementById("generatePassword").disabled = false
 }
 
 async function updateOptionsFromStorage() {
     const options = await chrome.storage.sync.get(["numberOfWords"])
-    if (options.numberOfWords) {
-        document.getElementById("numberOfWords").value = options.numberOfWords
-    }
+
+    const numberOfWordsElement = document.getElementById("numberOfWords")
+    numberOfWordsElement.value =
+        options.numberOfWords
+            ? options.numberOfWords
+            : DEFAULT_NUMBER_OF_WORDS
+    numberOfWordsElement.disabled = false
 }
 
 function selectWord(wordList) {
