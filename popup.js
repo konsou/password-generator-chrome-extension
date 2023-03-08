@@ -1,10 +1,6 @@
 const DEFAULT_NUMBER_OF_WORDS = 4
 let words = []
 
-window.addEventListener("load", async function () {
-    updateOptionsFromStorage()
-    getWordsFromBackground()
-})
 
 async function getWordsFromBackground() {
     words = (await chrome.runtime.sendMessage({getWords: true})).words;
@@ -39,7 +35,7 @@ function getRandomNumberInRange(min, max) {
     return Math.floor(randomNumber * (max - min + 1) + min); // Scale the float to the range and return an integer
 }
 
-document.getElementById("generatePassword").addEventListener("click", async function (e) {
+async function generatePassPhrase() {
     const numberOfWords = parseInt(document.getElementById("numberOfWords").value);
     const capitalizeWords = document.getElementById('capitalizeWords').checked;
     const dashesBetweenWords = document.getElementById('dashesBetweenWords').checked;
@@ -60,6 +56,27 @@ document.getElementById("generatePassword").addEventListener("click", async func
         allSelectedWords += selectedWord
     }
     document.getElementById("generatedPassword").innerHTML = allSelectedWords
+}
+
+async function saveChangedOption(e) {
+    const storageKey = e.target.id.toString()
+    const value = e.target.value
+    const storageObject = {}
+    storageObject[storageKey] = value
+    await chrome.storage.sync.set(storageObject)
+}
+
+// Event listeners
+window.addEventListener("load", async function () {
+    await Promise.all([
+        updateOptionsFromStorage(),
+        getWordsFromBackground(),
+    ])
+    generatePassPhrase()
+})
+
+document.getElementById("generatePassword").addEventListener("click", async function (e) {
+    generatePassPhrase()
 })
 
 document.getElementById("copyToClipboard").addEventListener("click", function (e) {
@@ -70,10 +87,3 @@ document.getElementById("copyToClipboard").addEventListener("click", function (e
 document.getElementById("numberOfWords").addEventListener("change", saveChangedOption)
 document.getElementById("numberOfWords").addEventListener("keyup", saveChangedOption)
 
-async function saveChangedOption(e) {
-    const storageKey = e.target.id.toString()
-    const value = e.target.value
-    const storageObject = {}
-    storageObject[storageKey] = value
-    await chrome.storage.sync.set(storageObject)
-}
