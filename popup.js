@@ -35,7 +35,7 @@ function getRandomNumberInRange(min, max) {
     return Math.floor(randomNumber * (max - min + 1) + min); // Scale the float to the range and return an integer
 }
 
-async function generatePassPhrase() {
+async function generatePassphrase() {
     const numberOfWords = parseInt(document.getElementById("numberOfWords").value);
     const capitalizeWords = document.getElementById('capitalizeWords').checked;
     const dashesBetweenWords = document.getElementById('dashesBetweenWords').checked;
@@ -72,11 +72,11 @@ window.addEventListener("load", async function () {
         updateOptionsFromStorage(),
         getWordsFromBackground(),
     ])
-    generatePassPhrase()
+    generatePassphrase()
 })
 
 document.getElementById("generatePassword").addEventListener("click", async function (e) {
-    generatePassPhrase()
+    generatePassphrase()
 })
 
 document.getElementById("copyToClipboard").addEventListener("click", function (e) {
