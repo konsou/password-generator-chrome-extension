@@ -42,8 +42,8 @@ async function generatePassphrase() {
     for (let i = 0; i < numberOfWords; i++) {
         let selectedWord = selectWord(words)
         if (capitalizeWords) selectedWord = capitalize(selectedWord)
-        if (dashesBetweenWords && i > 0) selectedWord = `-${selectedWord}`
-        if (includeNumber && i === numberOfWords - 1) selectedWord = `${selectedWord}${getRandomNumberInRange(0, 9)}`
+        if (dashesBetweenWords && i > 0) selectedWord = "-" + selectedWord
+        if (includeNumber && i === numberOfWords - 1) selectedWord += getRandomNumberInRange(0, 9).toString()
         allSelectedWords += selectedWord
     }
     document.getElementById("generatedPassword").innerHTML = allSelectedWords
