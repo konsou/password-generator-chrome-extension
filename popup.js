@@ -11,10 +11,7 @@ async function updateOptionsFromStorage() {
     const options = await chrome.storage.sync.get(["numberOfWords"])
 
     const numberOfWordsElement = document.getElementById("numberOfWords")
-    numberOfWordsElement.value =
-        options.numberOfWords
-            ? options.numberOfWords
-            : DEFAULT_NUMBER_OF_WORDS
+    numberOfWordsElement.value = options.numberOfWords || DEFAULT_NUMBER_OF_WORDS
     numberOfWordsElement.disabled = false
 }
 
@@ -72,7 +69,7 @@ window.addEventListener("load", async function () {
         updateOptionsFromStorage(),
         getWordsFromBackground(),
     ])
-    generatePassphrase()
+    await generatePassphrase()
 })
 
 document.getElementById("generatePassword").addEventListener("click", async function (e) {
