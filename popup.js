@@ -41,18 +41,17 @@ async function generatePassphrase() {
     let allSelectedWords = ""
     for (let i = 0; i < numberOfWords; i++) {
         let selectedWord = selectWord(words)
-        if (capitalizeWords) {
-            selectedWord = capitalize(selectedWord)
-        }
-        if (dashesBetweenWords && i > 0) {
-            selectedWord = `-${selectedWord}`
-        }
-        if (includeNumber && i === numberOfWords - 1) {
-            selectedWord = `${selectedWord}${getRandomNumberInRange(0, 9)}`
-        }
+        if (capitalizeWords) selectedWord = capitalize(selectedWord)
+        if (dashesBetweenWords && i > 0) selectedWord = `-${selectedWord}`
+        if (includeNumber && i === numberOfWords - 1) selectedWord = `${selectedWord}${getRandomNumberInRange(0, 9)}`
         allSelectedWords += selectedWord
     }
     document.getElementById("generatedPassword").innerHTML = allSelectedWords
+}
+
+async function copyPassphraseToClipboard() {
+    const text = document.getElementById("generatedPassword").innerHTML
+    navigator.clipboard.writeText(text);
 }
 
 async function saveChangedOption(e) {
@@ -72,15 +71,8 @@ window.addEventListener("load", async function () {
     await generatePassphrase()
 })
 
-document.getElementById("generatePassword").addEventListener("click", async function (e) {
-    generatePassphrase()
-})
-
-document.getElementById("copyToClipboard").addEventListener("click", function (e) {
-    const text = document.getElementById("generatedPassword").innerHTML
-    navigator.clipboard.writeText(text);
-})
-
+document.getElementById("generatePassword").addEventListener("click", generatePassphrase)
+document.getElementById("copyToClipboard").addEventListener("click", copyPassphraseToClipboard)
 document.getElementById("numberOfWords").addEventListener("change", saveChangedOption)
 document.getElementById("numberOfWords").addEventListener("keyup", saveChangedOption)
 
