@@ -1,8 +1,9 @@
 const DEFAULT_NUMBER_OF_WORDS = 4;
 let words = [];
 
-async function getWordsFromBackground() {
-  words = (await chrome.runtime.sendMessage({ getWords: true })).words;
+async function loadWords() {
+  const loadedWords = await fetch('words/kotus-sanalista-yhdistetty.json');
+  words = await loadedWords.json();
   document.getElementById('generatePassword').disabled = false;
 }
 
@@ -66,7 +67,7 @@ async function saveChangedOption(e) {
 
 // Event listeners
 window.addEventListener('load', async () => {
-  await Promise.all([updateOptionsFromStorage(), getWordsFromBackground()]);
+  await Promise.all([updateOptionsFromStorage(), loadWords()]);
   await generatePassphrase();
 });
 
